@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#ffffff</color>
+
+    <color name="bg_black">#212121</color>
+    <color name="yellow_text">#f6d168</color>
+    <color name="text_white">#ffffff</color>
+    <color name="text_black">#000000</color>
+
+    <color name="base_rating">#0c1a21</color>
+
+    <!-- Upvote -->
+    <color name="up_vote_base">#29442b</color>
+    <color name="up_vote_main">#62cc82</color>
+
+    <!-- Downvote -->
+    <color name="down_vote_base">#403e17</color>
+    <color name="down_vote_main">#d4d553</color>
+</resources>

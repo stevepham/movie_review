@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#404040">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/bg_black"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/yellow_text"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:fontFamily="@font/lobster_regular"
+            android:text="MOVIEBOX"/>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <TextView
+        android:id="@+id/tv_playing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/yellow_text"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/now_playing"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_poster"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_playing"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_poster"
+        app:layoutManager=".ui.custom.CenterZoomLayoutManager"
+        android:orientation="horizontal"/>
+
+    <com.ht.movie.ui.custom.StateView
+        android:id="@+id/poster_state"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/rv_poster"
+        app:layout_constraintEnd_toEndOf="@id/rv_poster"
+        app:layout_constraintTop_toTopOf="@id/rv_poster"
+        app:layout_constraintBottom_toBottomOf="@id/rv_poster"/>
+
+    <TextView
+        android:id="@+id/tv_popular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_poster"
+        android:textColor="@color/yellow_text"
+        android:textSize="18sp"
+        android:text="@string/popular"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_popular"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_popular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_movie"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <com.ht.movie.ui.custom.StateView
+        android:id="@+id/popular_state"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/rv_popular"
+        app:layout_constraintBottom_toBottomOf="@id/rv_popular"
+        app:layout_constraintEnd_toEndOf="@id/rv_popular"
+        app:layout_constraintStart_toStartOf="@id/rv_popular"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

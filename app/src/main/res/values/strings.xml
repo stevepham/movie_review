@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Movie</string>
+    <string name="overview">Overview</string>
+    <string name="now_playing">Playing now</string>
+    <string name="popular">Most popular</string>
+    <string name="oop_msg">Oop!!! Please try again</string>
+    <string name="empty_msg">Nothing found!!!</string>
+    <string name="network_err_msg">Your network maybe down. Please try again!!!</string>
+    <string name="unknown_msg">Some unexpect issues occurred. Please try later!!!</string>
+    <string name="invalid_msg">Your request is invalidated!!!</string>
+</resources>
