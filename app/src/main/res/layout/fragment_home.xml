@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_playing"
         tools:itemCount="10"
         tools:listitem="@layout/item_poster"
-        app:layoutManager=".ui.custom.CenterZoomLayoutManager"
+        app:layoutManager="com.ht.movie.ui.custom.CenterZoomLayoutManager"
         android:orientation="horizontal"/>
 
     <com.ht.movie.ui.custom.StateView

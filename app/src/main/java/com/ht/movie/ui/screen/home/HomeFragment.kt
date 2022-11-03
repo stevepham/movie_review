@@ -11,15 +11,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import com.ht.movie.R
 import com.ht.movie.adapter.MoviesAdapter
 import com.ht.movie.adapter.PosterAdapter
-import com.ht.movie.databinding.FragmentHomeBinding
 import com.ht.movie.ext.hide
 import com.ht.movie.ui.screen.base.IIntent
 import com.ht.movie.ui.screen.base.IState
 import com.ht.movie.ui.screen.base.IView
 import com.ht.movie.ui.screen.detail.DetailFragment
+import com.ht117.app.R
+import com.ht117.app.databinding.FragmentHomeBinding
 import com.ht117.data.model.EMPTY
 import com.ht117.data.model.Movie
 import com.ht117.data.model.State
@@ -46,17 +46,6 @@ class HomeFragment: Fragment(R.layout.fragment_home), IView<HomeState> {
     private val viewModel: HomeViewModel by viewModel()
     private val posterAdapter = PosterAdapter(this::selectMovie)
     private val popularAdapter = MoviesAdapter(this::selectMovie)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        if (binding == null) {
-            binding = FragmentHomeBinding.inflate(inflater, container, false)
-        }
-        return binding!!.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -107,6 +96,7 @@ class HomeFragment: Fragment(R.layout.fragment_home), IView<HomeState> {
                 handlePoster(state.posters)
                 handlePopular(state.popular)
             }
+            else -> {}
         }
     }
 

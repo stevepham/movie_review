@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.request.CachePolicy
-import com.ht.movie.R
-import com.ht.movie.databinding.ItemPosterBinding
 import com.ht.movie.ui.screen.home.IMovieCallback
+import com.ht117.app.R
+import com.ht117.app.databinding.ItemPosterBinding
 import com.ht117.data.model.Movie
 import com.ht117.data.model.getPosterUrl
 

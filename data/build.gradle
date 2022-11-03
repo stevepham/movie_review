@@ -1,0 +1,58 @@
+import com.ht117.config.Deps
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.20'
+}
+
+android {
+    namespace "com.ht117.data"
+    compileSdkVersion Deps.App.compileSdk
+
+    defaultConfig {
+        minSdkVersion Deps.App.minSdk
+        targetSdkVersion Deps.App.targetSdk
+        versionCode = Deps.App.versionCode
+        versionName = Deps.App.versionName
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        getByName("release") {
+//            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+        }
+    }
+}
+
+dependencies {
+    api Deps.Androidx.coreKtx
+    api Deps.Koin.core
+    api Deps.Koin.android
+    api(Deps.Kt.coAndroid)
+
+    implementation Deps.Networks.ktorCore
+    implementation Deps.Networks.ktorOkhttp
+    api Deps.Androidx.paging
+    implementation Deps.Networks.serialization
+    implementation Deps.Networks.ktorContent
+    implementation Deps.Networks.ktorJson
+    implementation(Deps.Networks.logger)
+//
+//    implementation(Deps.Test.ktor)
+//    testImplementation(Deps.Test.jUnit4)
+//    testImplementation(Deps.Test.mockk)
+//    testImplementation(Deps.Test.coroutine)
+
+}

@@ -3,7 +3,7 @@ package com.ht.movie.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ht.movie.databinding.ItemGenreBinding
+import com.ht117.app.databinding.ItemGenreBinding
 
 class GenreAdapter: RecyclerView.Adapter<GenreAdapter.GenreHolder>() {
 

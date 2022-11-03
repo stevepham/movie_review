@@ -1,10 +1,12 @@
 package com.ht117.data.source
 
+import android.util.Log
 import com.ht117.data.model.*
 import com.ht117.data.response.MovieResponse
 import com.ht117.data.response.Response
 import com.ht117.data.response.toMovie
 import io.ktor.client.*
+import io.ktor.client.call.body
 import io.ktor.client.request.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -24,16 +26,20 @@ class MovieRemote(private val api: HttpClient): IMovieSource {
 
     override suspend fun requestNowPlaying() = flow {
         emit(State.Loading)
-        val response = api.get<Response<List<MovieResponse>>>("${RemoteConfig.BaseHost}/movie/now_playing?language=en-US")
-        val result = response.results.map {
-            it.toMovie()
-        }
-        if (result.isNotEmpty()) {
-            emit(State.Success(result))
+        val networkResponse = api.get(urlString = "${RemoteConfig.BaseHost}/movie/now_playing?language=en-US}")
+        if (networkResponse.status.value in 200..299) {
+            val body = networkResponse.body<Response<List<MovieResponse>>>()
+            val result = body.results.map { it.toMovie() }
+            if (result.isNotEmpty()) {
+                emit(State.Success(result))
+            } else {
+                emit(State.Failed(EMPTY))
+            }
         } else {
-            emit(State.Failed(EMPTY))
+            emit(State.Failed(NET_ERR))
         }
     }.catch { e ->
+        Log.d("Debug", "Exception ${e.message} ${e.printStackTrace()}")
         when (e) {
             is UnknownHostException -> emit(State.Failed(NET_ERR))
             else -> emit(State.Failed(UNKNOWN))
@@ -43,15 +49,18 @@ class MovieRemote(private val api: HttpClient): IMovieSource {
     override suspend fun requestPopular(page: Int): State<List<Movie>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = api.get<Response<List<MovieResponse>>>("${RemoteConfig.BaseHost}/movie/popular?language=en-US") {
-                    parameter("page", page)
-                }
-                val result = response.results.map {
-                    val movieResponse = api.get<MovieResponse>("${RemoteConfig.BaseHost}/movie/${it.id}?language=en-US")
-                    movieResponse.toMovie()
-                }
-                if (result.isNotEmpty()) {
-                    State.Success(result)
+                val networkResponse = api.get(urlString = "${RemoteConfig.BaseHost}/movie/popular?language=en-US")
+                if (networkResponse.status.value in 200..299) {
+                    val response = networkResponse.body<Response<List<MovieResponse>>>()
+                    val result = response.results.map {
+                        val movieResponse = api.get(urlString = "${RemoteConfig.BaseHost}/movie/${it.id}?language=en-US").body<MovieResponse>()
+                        movieResponse.toMovie()
+                    }
+                    if (result.isNotEmpty()) {
+                        State.Success(result)
+                    } else {
+                        State.Failed(EMPTY)
+                    }
                 } else {
                     State.Failed(EMPTY)
                 }
@@ -65,7 +74,7 @@ class MovieRemote(private val api: HttpClient): IMovieSource {
 
     override suspend fun requestDetail(movieId: Long) = flow {
         emit(State.Loading)
-        val response = api.get<MovieResponse>("${RemoteConfig.BaseHost}/movie/${movieId}?language=en-US")
+        val response = api.get("${RemoteConfig.BaseHost}/movie/${movieId}?language=en-US").body<MovieResponse>()
         emit(State.Success(response.toMovie()))
     }.catch { e ->
         when (e) {

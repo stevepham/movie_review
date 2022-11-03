@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ht.movie">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,7 +13,8 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.ht.movie.ui.screen.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

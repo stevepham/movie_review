@@ -1,0 +1,51 @@
+import com.ht117.config.Deps
+
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+}
+
+
+android {
+    namespace Deps.App.ID
+    compileSdkVersion Deps.App.compileSdk
+
+    defaultConfig {
+        minSdkVersion Deps.App.minSdk
+        targetSdkVersion Deps.App.targetSdk
+        versionCode = Deps.App.versionCode
+        versionName = Deps.App.versionName
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        getByName("release") {
+//            isMinifyEnabled false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation Deps.Androidx.constraint
+    implementation Deps.Androidx.navFragment
+    implementation Deps.Androidx.navUiKtx
+    implementation Deps.Common.material
+
+    implementation(Deps.Networks.coil)
+    implementation(project(":data"))
+}

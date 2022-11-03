@@ -2,13 +2,14 @@ package com.ht.movie.ui.custom
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.*
-import android.os.Parcel
-import android.os.Parcelable
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
-import com.ht.movie.R
+import com.ht117.app.R
 import kotlin.math.roundToInt
 
 class RatingView @JvmOverloads constructor(

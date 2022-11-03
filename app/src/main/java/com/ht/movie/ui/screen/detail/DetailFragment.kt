@@ -12,17 +12,22 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.ht.movie.R
 import com.ht.movie.adapter.GenreAdapter
-import com.ht.movie.databinding.FragmentDetailBinding
 import com.ht.movie.ext.hide
 import com.ht.movie.ext.show
 import com.ht.movie.ui.screen.base.IIntent
 import com.ht.movie.ui.screen.base.IState
 import com.ht.movie.ui.screen.base.IView
-import com.ht117.data.model.*
+import com.ht117.app.R
+import com.ht117.app.databinding.FragmentDetailBinding
+import com.ht117.data.model.ErrCode
+import com.ht117.data.model.INVALIDATE
+import com.ht117.data.model.Movie
+import com.ht117.data.model.State
+import com.ht117.data.model.getFormatDate
+import com.ht117.data.model.getFormatDuration
+import com.ht117.data.model.getPosterUrl
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -106,6 +111,8 @@ class DetailFragment: DialogFragment(R.layout.fragment_detail), IView<DetailStat
             is DetailState.MovieState -> {
                 handleLoadMovieState(state.movie)
             }
+            else -> {
+            }
         }
     }
 
@@ -138,6 +145,7 @@ class DetailFragment: DialogFragment(R.layout.fragment_detail), IView<DetailStat
                     is State.Success -> {
                         showMovieInfo(it.data)
                     }
+                    else -> {}
                 }
             }
         }

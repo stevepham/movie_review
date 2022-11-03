@@ -1,17 +1,15 @@
 package com.ht.movie.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.request.CachePolicy
-import com.ht.movie.R
-import com.ht.movie.databinding.ItemMovieBinding
 import com.ht.movie.ui.screen.home.IMovieCallback
+import com.ht117.app.R
+import com.ht117.app.databinding.ItemMovieBinding
 import com.ht117.data.model.Movie
 import com.ht117.data.model.getFormatDate
 import com.ht117.data.model.getFormatDuration

@@ -1,20 +1,22 @@
 package com.ht117.data.source
 
-import io.ktor.client.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import okhttp3.logging.HttpLoggingInterceptor
 
 object RemoteConfig {
     const val BaseHost = "https://api.themoviedb.org/3"
 
-    private val json = Json {
+    private val jsonConfig = Json {
         isLenient = true
         ignoreUnknownKeys = true
         prettyPrint = true
         encodeDefaults = true
+        encodeDefaults = true
+        classDiscriminator = "#class"
     }
 
     private external fun getAppId(): String
@@ -38,8 +40,8 @@ object RemoteConfig {
                 it.proceed(newReq)
             }
         }
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(json)
+        install(ContentNegotiation) {
+            json(jsonConfig)
         }
     }
 }

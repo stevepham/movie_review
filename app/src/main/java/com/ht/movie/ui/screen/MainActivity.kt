@@ -2,15 +2,16 @@ package com.ht.movie.ui.screen
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ht.movie.databinding.ActivityMainBinding
+import com.ht117.app.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
